@@ -1,3 +1,5 @@
+*.o
+*.a
 *~
 darwin_fat
 clang_darwin
