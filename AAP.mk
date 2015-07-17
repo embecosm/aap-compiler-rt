@@ -144,7 +144,8 @@ SOURCES = \
   udivti3.c \
   umoddi3.c \
   umodsi3.c \
-  umodti3.c
+  umodti3.c \
+  ashlsi3.S
 
 OBJECTS = $(patsubst %.S,%.o,$(SOURCES:.c=.o))
 LIB = libcompiler_rt.a
@@ -152,13 +153,10 @@ LIB = libcompiler_rt.a
 $(LIB): $(OBJECTS)
 	$(AR) $(LIB) $(OBJECTS)
 
-%.o: lib/aap/%.c
+%.o: lib/builtins/aap/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-%.o: lib/aap/%.S
-	$(CC) $(CFLAGS) -c $< -o $@
-
-%.o: lib/%.c
+%.o: lib/builtins/aap/%.S
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: lib/builtins/%.c
