@@ -145,7 +145,13 @@ SOURCES = \
   umoddi3.c \
   umodsi3.c \
   umodti3.c \
-  ashlsi3.S
+  ashlsi3.S \
+  mulhi3.c \
+  divhi3.c \
+  modhi3.c \
+  udivhi3.c \
+  umodhi3.c
+
 
 OBJECTS = $(patsubst %.S,%.o,$(SOURCES:.c=.o))
 LIB = libcompiler_rt.a
