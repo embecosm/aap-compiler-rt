@@ -17,12 +17,12 @@
   .align  1
   .type   __ashlsi3,@function
 __ashlsi3:
-  mov   $r7,  16
+  movi  $r7,  16
   blts  0f, $r5,  $r7
   ; amount >= 16
   sub   $r5,  $r5,  $r7
   lsl   $r4,  $r3,  $r5   ; hi_out = lo_in << (amount - 16)
-  mov   $r3,  0           ; lo_out = 0
+  movi  $r3,  0           ; lo_out = 0
   bra   1f
 0:
   ; amount < 16
