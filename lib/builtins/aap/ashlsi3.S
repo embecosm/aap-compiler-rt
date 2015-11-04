@@ -17,19 +17,30 @@
   .align  1
   .type   __ashlsi3,@function
 __ashlsi3:
-  movi  $r7,  16
-  blts  0f, $r5,  $r7
+  ; $r2, $r3  in
+  ; $r4       amount
+  ; $r4 is preserved across the call
+
+  stw   [-$r1, 2],  $r5   ; save $r5
+  movi  $r5,  16          ; $r5 = 16
+  blts  0f,   $r4,  $r5
+
   ; amount >= 16
-  sub   $r5,  $r5,  $r7
-  lsl   $r4,  $r3,  $r5   ; hi_out = lo_in << (amount - 16)
-  movi  $r3,  0           ; lo_out = 0
+  sub   $r5,  $r4,  $r5
+  lsl   $r3,  $r2,  $r5   ; out.hi = in.lo << (amount - 16)
+  movi  $r2,  0           ; out.lo = 0
   bra   1f
 0:
   ; amount < 16
-  sub   $r7,  $r7,  $r5   ; 16 - amount
-  lsl   $r4,  $r4,  $r5   ; hi_out = hi_out << (amount)
-  lsr   $r7,  $r3,  $r7   ; r7 = lo_in >> (16 - amount)
-  or    $r4,  $r4,  $r7   ; hi_out |= r7
-  lsl   $r3,  $r3,  $r5   ; lo_out = lo_in << amount
+  stw   [-$r1, 2],  $r6   ; save $r6
+  sub   $r5,  $r5,  $r4   ; $r5 = 16 - amount
+  lsr   $r6,  $r2,  $r5   ; $r6 = in.lo >> (16 - $r5)
+  lsl   $r3,  $r3,  $r4   ; out.hi = in.hi << amount
+  or    $r3,  $r3,  $r6   ; out.hi = out.hi | $r6
+  lsl   $r2,  $r2,  $r4   ; out.lo = in.lo << amount
+  ldw   $r6,  [$r1+, 2]   ; restore $r6
 1:
+  ldw   $r5,  [$r1+, 2]   ; restore $r5
+
+  ; $r2, $r3  out
   jmp   $r0
