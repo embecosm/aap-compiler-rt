@@ -22,6 +22,8 @@ __ashlsi3:
   ; $r4 is preserved across the call
 
   stw   [-$r1, 2],  $r5   ; save $r5
+  movi  $r5,  0           ; $r5 = 0
+  beq   1f,   $r4,  $r5   ; amount == 0
   movi  $r5,  16          ; $r5 = 16
   blts  0f,   $r4,  $r5
 
