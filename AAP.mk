@@ -152,6 +152,7 @@ SOURCES = \
   lshrsi3.c \
   modhi3.c \
   mulhi3.c \
+  mulsi3.c \
   udivhi3.c \
   umodhi3.c
 
