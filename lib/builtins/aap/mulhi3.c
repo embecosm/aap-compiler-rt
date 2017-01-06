@@ -12,7 +12,9 @@
  * ===----------------------------------------------------------------------===
  */
 
-int __mulhi3(int a, int b)
+#include "../int_lib.h"
+
+hi_int __mulhi3(hi_int a, hi_int b)
 {
   unsigned int res = 0;
 

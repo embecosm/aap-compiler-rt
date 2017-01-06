@@ -20,6 +20,9 @@
 
 #include "int_endianness.h"
 
+typedef          short hi_int;
+typedef unsigned short hu_int;
+
 typedef      int si_int;
 typedef unsigned su_int;
 

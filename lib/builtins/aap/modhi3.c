@@ -12,9 +12,13 @@
  * ===----------------------------------------------------------------------===
  */
 
-int __modhi3(int a, int b)
+#include "../int_lib.h"
+
+COMPILER_RT_ABI si_int
+__modsi3(si_int a, si_int b);
+
+hi_int __modhi3(hi_int a, hi_int b)
 {
-  // FIXME: placeholder
-  return 0;
+  return __modsi3(a, b);
 }
 

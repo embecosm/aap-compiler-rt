@@ -12,9 +12,13 @@
  * ===----------------------------------------------------------------------===
  */
 
-int __umodhi3(int a, int b)
+#include "../int_lib.h"
+
+COMPILER_RT_ABI su_int
+__umodsi3(su_int a, su_int b);
+
+hu_int __umodhi3(hu_int a, hu_int b)
 {
-  // FIXME: placeholder
-  return 0;
+  return __umodsi3(a, b);
 }
 
