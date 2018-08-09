@@ -20,11 +20,11 @@
 
 #include "int_endianness.h"
 
-typedef          short hi_int;
-typedef unsigned short hu_int;
+typedef          int hi_int;
+typedef unsigned int hu_int;
 
-typedef      int si_int;
-typedef unsigned su_int;
+typedef          long si_int;
+typedef unsigned long su_int;
 
 typedef          long long di_int;
 typedef unsigned long long du_int;
