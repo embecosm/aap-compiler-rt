@@ -16,19 +16,15 @@
 
 si_int __mulsi3(si_int a, si_int b)
 {
-  unsigned long res = 0;
-
-  unsigned long sign = ((a < 0) == (b < 0)) ? 0 : 0x80000000;
-  unsigned long lhs = (a < 0) ? -a : a;
-  unsigned long rhs = (b < 0) ? -b : b;
+  unsigned long long res = 0;
 
   for (int i = 0; i < 32; i++) {
-    if (rhs & 1)
-      res += lhs;
-    rhs >>= 1;
-    lhs <<= 1;
+    if (b & 1)
+      res += a;
+    b >>= 1;
+    a <<= 1;
   }
 
-  return (res & 0x7fffffff) | sign;
+  return (res & 0xFFFFFFFF);
 }
 

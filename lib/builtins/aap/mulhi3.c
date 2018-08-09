@@ -16,19 +16,15 @@
 
 hi_int __mulhi3(hi_int a, hi_int b)
 {
-  unsigned int res = 0;
-
-  unsigned sign = ((a < 0) == (b < 0)) ? 0 : 0x8000;
-  unsigned lhs = (a < 0) ? -a : a;
-  unsigned rhs = (b < 0) ? -b : b;
+  unsigned long res = 0;
 
   for (int i = 0; i < 16; i++) {
-    if (rhs & 1)
-      res += lhs;
-    rhs >>= 1;
-    lhs <<= 1;
+    if (b & 1)
+      res += a;
+    b >>= 1;
+    a <<= 1;
   }
 
-  return (res & 0x7fff) | sign;
+  return (res & 0xFFFF);
 }
 
