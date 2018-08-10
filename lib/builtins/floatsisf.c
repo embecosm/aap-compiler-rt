@@ -21,7 +21,7 @@
 ARM_EABI_FNALIAS(i2f, floatsisf)
 
 COMPILER_RT_ABI fp_t
-__floatsisf(int a) {
+__floatsisf(si_int a) {
     
     const int aWidth = sizeof a * CHAR_BIT;
     
@@ -37,7 +37,7 @@ __floatsisf(int a) {
     }
     
     // Exponent of (fp_t)a is the width of abs(a).
-    const int exponent = (aWidth - 1) - __builtin_clz(a);
+    const int exponent = (aWidth - 1) - __builtin_clzsi(a);
     rep_t result;
     
     // Shift a into the significand field, rounding if it is a right-shift

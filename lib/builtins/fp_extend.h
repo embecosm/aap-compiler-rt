@@ -21,7 +21,7 @@ typedef float src_t;
 typedef uint32_t src_rep_t;
 #define SRC_REP_C UINT32_C
 static const int srcSigBits = 23;
-#define src_rep_t_clz __builtin_clz
+#define src_rep_t_clz __builtin_clzsi
 
 #elif defined SRC_DOUBLE
 typedef double src_t;
@@ -30,12 +30,12 @@ typedef uint64_t src_rep_t;
 static const int srcSigBits = 52;
 static inline int src_rep_t_clz(src_rep_t a) {
 #if defined __LP64__
-    return __builtin_clzl(a);
+    return __builtin_clzdi(a);
 #else
     if (a & REP_C(0xffffffff00000000))
-        return __builtin_clz(a >> 32);
+        return __builtin_clzsi(a >> 32);
     else
-        return 32 + __builtin_clz(a & REP_C(0xffffffff));
+        return 32 + __builtin_clzsi(a & REP_C(0xffffffff));
 #endif
 }
 
@@ -44,7 +44,7 @@ typedef uint16_t src_t;
 typedef uint16_t src_rep_t;
 #define SRC_REP_C UINT16_C
 static const int srcSigBits = 10;
-#define src_rep_t_clz __builtin_clz
+#define src_rep_t_clz __builtin_clzhi
 
 #else
 #error Source should be half, single, or double precision!
