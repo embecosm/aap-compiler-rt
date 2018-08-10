@@ -29,9 +29,9 @@ __ffsti2(ti_int a)
     {
         if (x.s.high == 0)
             return 0;
-        return __builtin_ctzll(x.s.high) + (1 + sizeof(di_int) * CHAR_BIT);
+        return __builtin_ctzdi(x.s.high) + (1 + sizeof(di_int) * CHAR_BIT);
     }
-    return __builtin_ctzll(x.s.low) + 1;
+    return __builtin_ctzdi(x.s.low) + 1;
 }
 
 #endif /* CRT_HAS_128BIT */

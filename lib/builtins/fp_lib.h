@@ -47,7 +47,7 @@ typedef float fp_t;
 #define significandBits 23
 
 static __inline int rep_clz(rep_t a) {
-    return __builtin_clz(a);
+    return __builtin_clzsi(a);
 }
 
 // 32x32 --> 64 bit multiply
@@ -68,12 +68,12 @@ typedef double fp_t;
 
 static __inline int rep_clz(rep_t a) {
 #if defined __LP64__
-    return __builtin_clzl(a);
+    return __builtin_clzdi(a);
 #else
     if (a & REP_C(0xffffffff00000000))
-        return __builtin_clz(a >> 32);
+        return __builtin_clzsi(a >> 32);
     else
-        return 32 + __builtin_clz(a & REP_C(0xffffffff));
+        return 32 + __builtin_clzsi(a & REP_C(0xffffffff));
 #endif
 }
 
@@ -134,7 +134,7 @@ static __inline int rep_clz(rep_t a) {
         word = uu.s.low;
         add = 64;
     }
-    return __builtin_clzll(word) + add;
+    return __builtin_clzdi(word) + add;
 }
 
 #define Word_LoMask   UINT64_C(0x00000000ffffffff)

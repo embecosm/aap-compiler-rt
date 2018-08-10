@@ -77,6 +77,36 @@
 /* Include internal utility function declarations. */
 #include "int_util.h"
 
+/* Define the corresponding builtins for clz with fixed size arguments. */
+#if UINT_MAX == 4294967295
+# define __builtin_clzhi(a) __builtin_clzs(a)
+# define __builtin_clzsi(a) __builtin_clz(a)
+# ifdef __LP64__
+#   define __builtin_clzdi(a) __builtin_clzl(a)
+# else
+#   define __builtin_clzdi(a) __builtin_clzll(a)
+# endif
+#elif UINT_MAX == 65535
+# define __builtin_clzhi(a) __builtin_clz(a)
+# define __builtin_clzsi(a) __builtin_clzl(a)
+# define __builtin_clzdi(a) __builtin_clzll(a)
+#endif
+
+/* Define the corresponding builtins for ctz with fixed size arguments. */
+#if UINT_MAX == 4294967295
+# define __builtin_ctzhi(a) __builtin_ctzs(a)
+# define __builtin_ctzsi(a) __builtin_ctz(a)
+# ifdef __LP64__
+#   define __builtin_ctzdi(a) __builtin_ctzl(a)
+# else
+#   define __builtin_ctzdi(a) __builtin_ctzll(a)
+# endif
+#elif UINT_MAX == 65535
+# define __builtin_ctzhi(a) __builtin_ctz(a)
+# define __builtin_ctzsi(a) __builtin_ctzl(a)
+# define __builtin_ctzdi(a) __builtin_ctzll(a)
+#endif
+
 COMPILER_RT_ABI si_int __paritysi2(si_int a);
 COMPILER_RT_ABI si_int __paritydi2(di_int a);
 

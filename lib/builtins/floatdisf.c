@@ -30,7 +30,7 @@ __floatdisf(di_int a)
     const unsigned N = sizeof(di_int) * CHAR_BIT;
     const di_int s = a >> (N-1);
     a = (a ^ s) - s;
-    int sd = N - __builtin_clzll(a);  /* number of significant digits */
+    int sd = N - __builtin_clzdi(a);  /* number of significant digits */
     int e = sd - 1;             /* exponent */
     if (sd > FLT_MANT_DIG)
     {

@@ -31,7 +31,7 @@ __udivsi3(su_int n, su_int d)
         return 0; /* ?! */
     if (n == 0)
         return 0;
-    sr = __builtin_clz(d) - __builtin_clz(n);
+    sr = __builtin_clzsi(d) - __builtin_clzsi(n);
     /* 0 <= sr <= n_uword_bits - 1 or sr large */
     if (sr > n_uword_bits - 1)  /* d > r */
         return 0;

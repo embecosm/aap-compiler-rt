@@ -55,7 +55,7 @@ __floatundidf(du_int a)
     if (a == 0)
         return 0.0;
     const unsigned N = sizeof(du_int) * CHAR_BIT;
-    int sd = N - __builtin_clzll(a);  /* number of significant digits */
+    int sd = N - __builtin_clzdi(a);  /* number of significant digits */
     int e = sd - 1;             /* exponent */
     if (sd > DBL_MANT_DIG)
     {

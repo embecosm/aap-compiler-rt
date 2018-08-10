@@ -34,7 +34,7 @@ __floatdixf(di_int a)
     const unsigned N = sizeof(di_int) * CHAR_BIT;
     const di_int s = a >> (N-1);
     a = (a ^ s) - s;
-    int clz = __builtin_clzll(a);
+    int clz = __builtin_clzdi(a);
     int e = (N - 1) - clz ;    /* exponent */
     long_double_bits fb;
     fb.u.high.s.low = ((su_int)s & 0x00008000) |  /* sign */

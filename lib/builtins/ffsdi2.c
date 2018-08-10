@@ -27,7 +27,7 @@ __ffsdi2(di_int a)
     {
         if (x.s.high == 0)
             return 0;
-        return __builtin_ctz(x.s.high) + (1 + sizeof(si_int) * CHAR_BIT);
+        return __builtin_ctzsi(x.s.high) + (1 + sizeof(si_int) * CHAR_BIT);
     }
-    return __builtin_ctz(x.s.low) + 1;
+    return __builtin_ctzsi(x.s.low) + 1;
 }

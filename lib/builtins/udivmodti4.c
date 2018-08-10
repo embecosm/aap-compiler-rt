@@ -95,13 +95,13 @@ __udivmodti4(tu_int a, tu_int b, tu_int* rem)
                 r.s.high = n.s.high & (d.s.high - 1);
                 *rem = r.all;
             }
-            return n.s.high >> __builtin_ctzll(d.s.high);
+            return n.s.high >> __builtin_ctzdi(d.s.high);
         }
         /* K K
          * ---
          * K 0
          */
-        sr = __builtin_clzll(d.s.high) - __builtin_clzll(n.s.high);
+        sr = __builtin_clzdi(d.s.high) - __builtin_clzdi(n.s.high);
         /* 0 <= sr <= n_udword_bits - 2 or sr large */
         if (sr > n_udword_bits - 2)
         {
@@ -132,7 +132,7 @@ __udivmodti4(tu_int a, tu_int b, tu_int* rem)
                     *rem = n.s.low & (d.s.low - 1);
                 if (d.s.low == 1)
                     return n.all;
-                sr = __builtin_ctzll(d.s.low);
+                sr = __builtin_ctzdi(d.s.low);
                 q.s.high = n.s.high >> sr;
                 q.s.low = (n.s.high << (n_udword_bits - sr)) | (n.s.low >> sr);
                 return q.all;
@@ -141,8 +141,8 @@ __udivmodti4(tu_int a, tu_int b, tu_int* rem)
              * ---
              * 0 K
              */
-            sr = 1 + n_udword_bits + __builtin_clzll(d.s.low)
-                                   - __builtin_clzll(n.s.high);
+            sr = 1 + n_udword_bits + __builtin_clzdi(d.s.low)
+                                   - __builtin_clzdi(n.s.high);
             /* 2 <= sr <= n_utword_bits - 1
              * q.all = n.all << (n_utword_bits - sr);
              * r.all = n.all >> sr;
@@ -176,7 +176,7 @@ __udivmodti4(tu_int a, tu_int b, tu_int* rem)
              * ---
              * K K
              */
-            sr = __builtin_clzll(d.s.high) - __builtin_clzll(n.s.high);
+            sr = __builtin_clzdi(d.s.high) - __builtin_clzdi(n.s.high);
             /*0 <= sr <= n_udword_bits - 1 or sr large */
             if (sr > n_udword_bits - 1)
             {
