@@ -72,7 +72,7 @@ __floatdisf(di_int a)
     }
     float_bits fb;
     fb.u = ((su_int)s & 0x80000000) |  /* sign */
-           ((e + 127) << 23)       |  /* exponent */
+           ((su_int)(e + 127) << 23) |  /* exponent */
            ((su_int)a & 0x007FFFFF);   /* mantissa */
     return fb.f;
 }
